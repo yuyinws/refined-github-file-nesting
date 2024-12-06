@@ -1,7 +1,7 @@
 {
   "name": "refined-github-file-nesting",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "author": "Leo <https://github.com/yuyinws>",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "release": "bumpp"
+    "release": "bumpp && pnpm build"
   },
   "dependencies": {
     "picomatch": "^4.0.2"
