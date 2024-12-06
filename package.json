@@ -1,0 +1,22 @@
+{
+  "name": "refined-github-file-nesting",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "picomatch": "^4.0.2"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.11.2",
+    "@types/picomatch": "^3.0.1",
+    "eslint": "^9.16.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.12",
+    "vite-plugin-monkey": "^4.0.0"
+  }
+}
