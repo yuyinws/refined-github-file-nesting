@@ -2,9 +2,9 @@
 
 🗞️ Bring file nesting feature to GitHub.
 
-![demo](https://static.yuy1n.io/refined-github-file-nesting-demo.png)
-
 [Install on Greasyfork](https://greasyfork.org/zh-CN/scripts/519923-refined-github-file-nesting)
+
+![demo](https://static.yuy1n.io/refined-github-file-nesting-demo.png)
 
 ## Credits
 
