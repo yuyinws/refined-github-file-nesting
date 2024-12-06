@@ -4,10 +4,15 @@ import './style.css'
 
 (() => {
   function run() {
+    const rows = document.querySelectorAll('table[aria-labelledby="folders-and-files"] tbody tr.react-directory-row')
+
+    if (!rows.length) {
+      return
+    }
+
     const attrPrefix = 'rgfn'
 
     const ruleProperties = Object.keys(rules)
-    const rows = document.querySelectorAll('table[aria-labelledby="folders-and-files"] tbody tr.react-directory-row')
 
     const rowsData = Array.from(rows).map((row) => {
       const id = row.getAttribute('id') || 'unknown'
