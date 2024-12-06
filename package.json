@@ -1,7 +1,7 @@
 {
   "name": "refined-github-file-nesting",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "author": "Leo <https://github.com/yuyinws>",
   "license": "MIT",
