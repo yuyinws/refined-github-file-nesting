@@ -8,8 +8,10 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        icon: 'https://vitejs.dev/logo.svg',
-        namespace: 'npm/vite-plugin-monkey',
+        name: 'Refined GitHub File Nesting',
+        icon: 'https://www.google.com/s2/favicons?sz=64&domain=github.com',
+        namespace: 'yuyinws/refined-github-file-nesting',
+        description: 'Bring file nesting feature to GitHub',
         match: ['https://github.com/**'],
         version,
       },

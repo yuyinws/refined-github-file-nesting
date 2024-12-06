@@ -1,10 +1,11 @@
 // ==UserScript==
-// @name         refined-github-file-nesting
-// @namespace    npm/vite-plugin-monkey
+// @name         Refined GitHub File Nesting
+// @namespace    yuyinws/refined-github-file-nesting
 // @version      0.0.3
 // @author       Leo <https://github.com/yuyinws>
+// @description  Bring file nesting feature to GitHub
 // @license      MIT
-// @icon         https://vitejs.dev/logo.svg
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=github.com
 // @homepage     https://github.com/yuyinws/refined-github-file-nesting#readme
 // @homepageURL  https://github.com/yuyinws/refined-github-file-nesting#readme
 // @match        https://github.com/**
@@ -1589,78 +1590,88 @@
     "*.wat": "$(capture).wasm",
     "*.xaml": "$(capture).xaml.cs"
   };
-  const attrPrefix = "rgfn";
-  const ruleProperties = Object.keys(rules);
   (() => {
-    const rows = document.querySelectorAll('table[aria-labelledby="folders-and-files"] tbody tr.react-directory-row');
-    const rowsData = Array.from(rows).map((row) => {
-      var _a, _b;
-      const id = row.getAttribute("id") || "unknown";
-      const name = ((_a = row.querySelector("a")) == null ? void 0 : _a.textContent) || "unknown";
-      const fileType = ((_b = row.querySelector("svg")) == null ? void 0 : _b.getAttribute("class")) === "icon-directory" ? "folder" : "file";
-      return {
-        id,
-        name,
-        type: fileType,
-        appendTo: ""
-      };
-    });
-    const files = rowsData.filter((row) => row.type === "file");
-    files.forEach((row) => {
-      const { name } = row;
-      const findRule = ruleProperties.find((rule) => {
-        const matcher = pm(rule);
-        return matcher(name);
+    function run() {
+      const attrPrefix = "rgfn";
+      const ruleProperties = Object.keys(rules);
+      const rows = document.querySelectorAll('table[aria-labelledby="folders-and-files"] tbody tr.react-directory-row');
+      const rowsData = Array.from(rows).map((row) => {
+        var _a, _b;
+        const id = row.getAttribute("id") || "unknown";
+        const name = ((_a = row.querySelector("a")) == null ? void 0 : _a.textContent) || "unknown";
+        const fileType = ((_b = row.querySelector("svg")) == null ? void 0 : _b.getAttribute("class")) === "icon-directory" ? "folder" : "file";
+        return {
+          id,
+          name,
+          type: fileType,
+          appendTo: ""
+        };
       });
-      if (findRule) {
-        const ruleValues = rules[findRule].split(",").map((rule) => rule.trim());
-        const matchers = ruleValues.map((rule) => pm(rule));
-        files.forEach((file) => {
-          if (file.id !== row.id && matchers.some((matcher) => matcher(file.name))) {
-            file.appendTo = row.id;
+      const files = rowsData.filter((row) => row.type === "file");
+      files.forEach((row) => {
+        const { name } = row;
+        const findRule = ruleProperties.find((rule) => {
+          const matcher = pm(rule);
+          return matcher(name);
+        });
+        if (findRule) {
+          const ruleValues = rules[findRule].split(",").map((rule) => rule.trim());
+          const matchers = ruleValues.map((rule) => pm(rule));
+          files.forEach((file) => {
+            if (file.id !== row.id && matchers.some((matcher) => matcher(file.name))) {
+              file.appendTo = row.id;
+            }
+          });
+        }
+      });
+      files.forEach((row) => {
+        var _a, _b, _c, _d;
+        const { id, appendTo } = row;
+        const rowEl = document.querySelector(`#${id}`);
+        if (appendTo) {
+          const appendToEl = document.querySelector(`#${appendTo}`);
+          rowEl.style.display = "none";
+          (_a = rowEl == null ? void 0 : rowEl.querySelectorAll(".react-directory-filename-column")) == null ? void 0 : _a.forEach((el) => {
+            el.setAttribute("style", "position: relative; left: 32px;");
+          });
+          if (appendToEl && rowEl) {
+            appendToEl.after(rowEl);
           }
-        });
-      }
-    });
-    files.forEach((row) => {
-      var _a, _b, _c, _d;
-      const { id, appendTo } = row;
-      const rowEl = document.querySelector(`#${id}`);
-      if (appendTo) {
-        const appendToEl = document.querySelector(`#${appendTo}`);
-        rowEl.style.display = "none";
-        (_a = rowEl == null ? void 0 : rowEl.querySelectorAll(".react-directory-filename-column")) == null ? void 0 : _a.forEach((el) => {
-          el.setAttribute("style", "position: relative; left: 32px;");
-        });
-        if (appendToEl && rowEl) {
-          appendToEl.after(rowEl);
-        }
-      } else {
-        const findAppendTo = files.filter((file) => file.appendTo === id);
-        if (findAppendTo.length > 0) {
-          rowEl.style.cursor = "pointer";
-          (_b = rowEl.querySelectorAll(".react-directory-filename-cell a")) == null ? void 0 : _b.forEach((el) => {
-            const content = el.textContent;
-            el.innerHTML = `${content}  <span class="${attrPrefix}-file-counts">(+${findAppendTo.length})</span>`;
-          });
-          (_c = rowEl.querySelectorAll(".react-directory-filename-column")) == null ? void 0 : _c.forEach((el) => {
-            el.setAttribute(`data-${attrPrefix}-toggle`, "0");
-          });
-          (_d = document.querySelector(`#${id}`)) == null ? void 0 : _d.addEventListener("click", () => {
-            var _a2;
-            const toggleEls = (_a2 = document.querySelector(`#${id}`)) == null ? void 0 : _a2.querySelectorAll(`[data-${attrPrefix}-toggle]`);
-            toggleEls == null ? void 0 : toggleEls.forEach((el) => {
-              el.setAttribute(`data-${attrPrefix}-toggle`, el.getAttribute(`data-${attrPrefix}-toggle`) === "0" ? "1" : "0");
+        } else {
+          const findAppendTo = files.filter((file) => file.appendTo === id);
+          if (findAppendTo.length > 0) {
+            rowEl.style.cursor = "pointer";
+            (_b = rowEl.querySelectorAll(".react-directory-filename-cell a")) == null ? void 0 : _b.forEach((el) => {
+              const content = el.textContent;
+              el.innerHTML = `${content}  <span class="${attrPrefix}-file-counts">(+${findAppendTo.length})</span>`;
             });
-            findAppendTo.forEach((file) => {
-              const el = document.querySelector(`#${file.id}`);
-              const currentStyle = el.style.display;
-              el.style.display = currentStyle === "none" ? "table-row" : "none";
+            (_c = rowEl.querySelectorAll(".react-directory-filename-column")) == null ? void 0 : _c.forEach((el) => {
+              el.setAttribute(`data-${attrPrefix}-toggle`, "0");
             });
-          });
+            (_d = document.querySelector(`#${id}`)) == null ? void 0 : _d.addEventListener("click", () => {
+              var _a2;
+              const toggleEls = (_a2 = document.querySelector(`#${id}`)) == null ? void 0 : _a2.querySelectorAll(`[data-${attrPrefix}-toggle]`);
+              toggleEls == null ? void 0 : toggleEls.forEach((el) => {
+                el.setAttribute(`data-${attrPrefix}-toggle`, el.getAttribute(`data-${attrPrefix}-toggle`) === "0" ? "1" : "0");
+              });
+              findAppendTo.forEach((file) => {
+                const el = document.querySelector(`#${file.id}`);
+                const currentStyle = el.style.display;
+                el.style.display = currentStyle === "none" ? "table-row" : "none";
+              });
+            });
+          }
         }
-      }
-    });
+      });
+    }
+    function init() {
+      setTimeout(() => {
+        run();
+      }, 1e3);
+    }
+    init();
+    document.addEventListener("pjax:end", () => init());
+    document.addEventListener("turbo:render", () => init());
   })();
 
 })();
