@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "release": "bumpp && pnpm build"
+    "release": "pnpm build && bumpp"
   },
   "dependencies": {
     "picomatch": "^4.0.2"
