@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Refined GitHub File Nesting
 // @namespace    yuyinws/refined-github-file-nesting
-// @version      0.0.5
+// @version      0.0.6
 // @author       Leo <https://github.com/yuyinws>
 // @description  Bring file nesting feature to GitHub
 // @license      MIT
@@ -1592,9 +1592,12 @@
   };
   (() => {
     function run() {
+      const rows = document.querySelectorAll('table[aria-labelledby="folders-and-files"] tbody tr.react-directory-row');
+      if (!rows.length) {
+        return;
+      }
       const attrPrefix = "rgfn";
       const ruleProperties = Object.keys(rules);
-      const rows = document.querySelectorAll('table[aria-labelledby="folders-and-files"] tbody tr.react-directory-row');
       const rowsData = Array.from(rows).map((row) => {
         var _a, _b;
         const id = row.getAttribute("id") || "unknown";
