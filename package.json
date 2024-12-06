@@ -1,12 +1,16 @@
 {
   "name": "refined-github-file-nesting",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "private": true,
+  "author": "Leo <https://github.com/yuyinws>",
+  "license": "MIT",
+  "homepage": "https://github.com/yuyinws/refined-github-file-nesting#readme",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "release": "bumpp"
   },
   "dependencies": {
     "picomatch": "^4.0.2"
@@ -14,6 +18,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.11.2",
     "@types/picomatch": "^3.0.1",
+    "bumpp": "^9.8.1",
     "eslint": "^9.16.0",
     "typescript": "^5.4.5",
     "vite": "^5.2.12",
