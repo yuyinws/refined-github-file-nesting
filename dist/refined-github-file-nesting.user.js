@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Refined GitHub File Nesting
 // @namespace    yuyinws/refined-github-file-nesting
-// @version      0.0.3
+// @version      0.0.5
 // @author       Leo <https://github.com/yuyinws>
 // @description  Bring file nesting feature to GitHub
 // @license      MIT
