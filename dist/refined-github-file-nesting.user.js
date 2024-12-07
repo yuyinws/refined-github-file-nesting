@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Refined GitHub File Nesting
 // @namespace    yuyinws/refined-github-file-nesting
-// @version      0.0.6
+// @version      0.0.7
 // @author       Leo <https://github.com/yuyinws>
 // @description  Bring file nesting feature to GitHub
 // @license      MIT
@@ -12,7 +12,7 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-(e=>{if(typeof GM_addStyle=="function"){GM_addStyle(e);return}const t=document.createElement("style");t.textContent=e,document.head.append(t)})(` [data-rgfn-toggle="0"]:before{content:"";width:1em;height:1em;background:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="0.5em" height="1em" viewBox="0 0 8 16"%3E%3Cpath fill-rule="evenodd" d="M7.5 8l-5 5L1 11.5L4.75 8L1 4.5L2.5 3l5 5z" fill="%23878787"/%3E%3C/svg%3E') no-repeat center / contain}[data-rgfn-toggle="1"]:before{content:"";width:1em;height:1em;background:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="0.63em" height="1em" viewBox="0 0 10 16"%3E%3Cpath fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25L8.5 4.5L10 6l-5 5z" fill="%23878787"/%3E%3C/svg%3E') no-repeat center / contain}.rgfn-file-counts{color:gray;font-size:12px;margin-left:4px;display:inline}[data-rgfn-toggle="1"] .rgfn-file-counts{display:none} `);
+(e=>{if(typeof GM_addStyle=="function"){GM_addStyle(e);return}const t=document.createElement("style");t.textContent=e,document.head.append(t)})(` [data-rgfn-toggle="0"]:before{content:"";width:1em;height:1em;color:var(--fgColor-muted, #808080);--rgdn-icon: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="0.5em" height="1em" viewBox="0 0 8 16"%3E%3Cpath fill-rule="evenodd" d="M7.5 8l-5 5L1 11.5L4.75 8L1 4.5L2.5 3l5 5z" fill="currentColor"/%3E%3C/svg%3E  ');mask:var(--rgdn-icon) no-repeat center / contain;-webkit-mask:var(--rgdn-icon) no-repeat center / contain;background-color:currentColor;mask-size:100% 100%;-webkit-mask-size:100% 100%}[data-rgfn-toggle="1"]:before{content:"";width:1em;height:1em;color:var(--fgColor-muted, #808080);--rgdn-icon: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="0.63em" height="1em" viewBox="0 0 10 16"%3E%3Cpath fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25L8.5 4.5L10 6l-5 5z" fill="currentColor"/%3E%3C/svg%3E');mask:var(--rgdn-icon) no-repeat center / contain;-webkit-mask:var(--rgdn-icon) no-repeat center / contain;background-color:currentColor;mask-size:100% 100%;-webkit-mask-size:100% 100%}.rgfn-file-counts{color:var(--fgColor-muted, #808080)!important;font-size:12px;margin-left:4px;display:inline}[data-rgfn-toggle="1"] .rgfn-file-counts{display:none} `);
 
 (function () {
   'use strict';
