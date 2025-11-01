@@ -17,7 +17,7 @@ import './style.css'
     const rowsData = Array.from(rows).map((row) => {
       const id = row.getAttribute('id') || 'unknown'
       const name = row.querySelector('a')?.textContent || 'unknown'
-      const fileType = row.querySelector('svg')?.getAttribute('class') === 'icon-directory' ? 'folder' : 'file'
+      const fileType = row.querySelector('svg')?.getAttribute('class')?.includes('icon-directory') ? 'folder' : 'file'
 
       return {
         id,
@@ -41,7 +41,8 @@ import './style.css'
         const matchers = ruleValues.map(rule => pm(rule))
 
         files.forEach((file) => {
-          if (file.id !== row.id && matchers.some(matcher => matcher(file.name))) {
+          // 确保只有文件类型可以被 nesting（file.type === 'file' 已通过 files 过滤保证）
+          if (file.id !== row.id && file.type === 'file' && matchers.some(matcher => matcher(file.name))) {
             file.appendTo = row.id
           }
         })
