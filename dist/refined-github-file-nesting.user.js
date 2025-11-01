@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Refined GitHub File Nesting
 // @namespace    yuyinws/refined-github-file-nesting
-// @version      0.0.7
+// @version      0.0.8
 // @author       Leo <https://github.com/yuyinws>
 // @description  Bring file nesting feature to GitHub
 // @license      MIT
@@ -1599,10 +1599,10 @@
       const attrPrefix = "rgfn";
       const ruleProperties = Object.keys(rules);
       const rowsData = Array.from(rows).map((row) => {
-        var _a, _b;
+        var _a, _b, _c;
         const id = row.getAttribute("id") || "unknown";
         const name = ((_a = row.querySelector("a")) == null ? void 0 : _a.textContent) || "unknown";
-        const fileType = ((_b = row.querySelector("svg")) == null ? void 0 : _b.getAttribute("class")) === "icon-directory" ? "folder" : "file";
+        const fileType = ((_c = (_b = row.querySelector("svg")) == null ? void 0 : _b.getAttribute("class")) == null ? void 0 : _c.includes("icon-directory")) ? "folder" : "file";
         return {
           id,
           name,
@@ -1621,7 +1621,7 @@
           const ruleValues = rules[findRule].split(",").map((rule) => rule.trim());
           const matchers = ruleValues.map((rule) => pm(rule));
           files.forEach((file) => {
-            if (file.id !== row.id && matchers.some((matcher) => matcher(file.name))) {
+            if (file.id !== row.id && file.type === "file" && matchers.some((matcher) => matcher(file.name))) {
               file.appendTo = row.id;
             }
           });
